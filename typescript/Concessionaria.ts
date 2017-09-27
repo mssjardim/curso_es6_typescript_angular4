@@ -1,6 +1,7 @@
 import Carro from './Carro'
+import { ConcessionariaInterface } from './ConcessionariaInterface'
 
-export default class Concessionaria {
+export default class Concessionaria implements ConcessionariaInterface {
     private endereco: string
     private listaDeCarros: Array<Carro>
 
@@ -15,5 +16,9 @@ export default class Concessionaria {
 
     public mostrarListaDeCarros(): Array<Carro> {
         return this.listaDeCarros
+    }
+
+    public fornecerHorariosDeFuncionamento(): string {
+        return 'De segunda à sexta das 08:00 às 17:00 e sábado das 08:00 às 12:00'
     }
 }
