@@ -1,1 +1,7 @@
-.cor { color: green }
+.navbar {
+    background: #1CB0F6 !important;
+}
+
+.navbar-inverse  {
+    color: rgba(255,255,255,1) !important;
+}
