@@ -1,6 +1,4 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
-.DS_Store
-/dist*
 
 # compiled output
 /dist
