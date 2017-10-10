@@ -9,7 +9,6 @@ import 'rxjs/add/operator/toPromise'
 @Injectable()
 export class OfertasService {
 
-
     constructor(private http: Http) { }
 
     public getOfertas(): Promise<Oferta[]> {
