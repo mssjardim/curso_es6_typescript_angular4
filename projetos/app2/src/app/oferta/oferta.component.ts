@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable'
 import { Observer } from 'rxjs/Observer'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/Rx'
+import { CarrinhoService } from '../carrinho.service'
 
 @Component({
   selector: 'app-oferta',
@@ -19,7 +20,9 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private ofertasService: OfertasService) { }
+    private ofertasService: OfertasService,
+    private carrinhoService: CarrinhoService
+  ) { }
 
   ngOnInit() {
 
@@ -33,5 +36,10 @@ export class OfertaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+  }
+
+  public adicionarItemCarrinho(): void {
+    this.carrinhoService.incluirItem(this.oferta)
+    console.log(this.carrinhoService.exibirItens());
   }
 }
