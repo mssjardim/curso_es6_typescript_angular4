@@ -213,6 +213,20 @@
       "complemento": "123",
       "formaPagamento": "",
       "id": 4
+    },
+    {
+      "endereco": "Rua José da Silva",
+      "numero": "500",
+      "complemento": "Casa A",
+      "formaPagamento": "dinheiro",
+      "id": 5
+    },
+    {
+      "endereco": "Rua Maria das Flores",
+      "numero": "125",
+      "complemento": "Casa B",
+      "formaPagamento": "debito",
+      "id": 6
     }
   ]
 }
