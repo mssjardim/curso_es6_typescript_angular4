@@ -18,7 +18,7 @@ input.ng-valid.ng-touched {
     box-shadow: 0 0 6px #28a745;
 }
 
-select.ng-valid.ng-touched {
+select.ng-valid.ng-dirty {
     border: 1px solid #28a745;
     box-shadow: 0 0 6px #28a745;
 }

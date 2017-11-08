@@ -227,6 +227,20 @@
       "complemento": "Casa B",
       "formaPagamento": "debito",
       "id": 6
+    },
+    {
+      "endereco": "Rua ABC",
+      "numero": "10",
+      "complemento": "Comp 2",
+      "formaPagamento": "dinheiro",
+      "id": 7
+    },
+    {
+      "endereco": "Rua Oi",
+      "numero": "10",
+      "complemento": "Comp Rua Oi",
+      "formaPagamento": "debito",
+      "id": 8
     }
   ]
 }
