@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Http, RequestOptions, Headers, Response } from '@angular/http'
 import { Observable } from 'rxjs/Observable'
-
 import { Pedido } from './shared/pedido.model'
 import { URL_API } from './app.api'
 
