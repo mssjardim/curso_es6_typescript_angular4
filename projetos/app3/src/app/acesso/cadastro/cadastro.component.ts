@@ -44,7 +44,9 @@ export class CadastroComponent implements OnInit {
     )
 
     this.autenticacaoService.cadastrarUsuario(usuario)
-    
+      .then((resposta: any) => {
+        this.exibirPainelLogin()
+      })
   }
 
 }

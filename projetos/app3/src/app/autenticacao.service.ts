@@ -1,11 +1,20 @@
+import { Injectable } from '@angular/core'
+import { Router } from '@angular/router'
 import { Usuario } from "./acesso/usuario.model";
 import * as firebase from 'firebase'
 
+@Injectable()
 export class Autenticacao {
 
-    public cadastrarUsuario(usuario: Usuario): void {
+    public token_id: string
 
-        firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
+    constructor(
+        private router: Router
+    ) { }
+
+    public cadastrarUsuario(usuario: Usuario): Promise<any> {
+
+        return firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
             .then((resposta: any) => {
 
                 delete usuario.senha
@@ -19,12 +28,15 @@ export class Autenticacao {
     }
 
     public autenticar(email: string, senha: string): void {
-        console.log('email', email);
-        console.log('senha', senha);
         
         firebase.auth().signInWithEmailAndPassword(email, senha)
             .then((resposta: any) => {
-                console.log(resposta);
+                firebase.auth().currentUser.getIdToken()
+                .then((idToken: string) => {
+                    this.token_id = idToken
+                    this.router.navigate(['/home'])
+                    
+                })
             })
             .catch((error: Error) => {
                 console.log(error);
