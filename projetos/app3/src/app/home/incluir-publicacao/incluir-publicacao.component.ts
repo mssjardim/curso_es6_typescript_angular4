@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms'
 import * as firebase from 'firebase'
 
@@ -16,6 +16,8 @@ import { Subject } from 'rxjs/Subject';
   encapsulation: ViewEncapsulation.None
 })
 export class IncluirPublicacaoComponent implements OnInit {
+
+  @Output() public atualizarTimeline: EventEmitter<any> = new EventEmitter<any>()
 
   public email: string
   private imagem: any
@@ -61,6 +63,7 @@ export class IncluirPublicacaoComponent implements OnInit {
 
         if (this.progresso.status === 'concluido') {
           this.progressoPublicacao = 'concluido'
+          this.atualizarTimeline.emit()
           continua.next(false)
         }
       })
