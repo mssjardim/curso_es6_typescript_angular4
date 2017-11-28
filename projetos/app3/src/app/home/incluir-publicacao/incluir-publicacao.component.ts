@@ -5,10 +5,6 @@ import * as firebase from 'firebase'
 import { Bd } from '../../bd.service'
 import { Progresso } from '../../progresso.service'
 
-import { Observable } from 'rxjs/Observable'
-import 'rxjs/Rx'
-import { Subject } from 'rxjs/Subject';
-
 @Component({
   selector: 'app-incluir-publicacao',
   templateUrl: './incluir-publicacao.component.html',
@@ -47,30 +43,21 @@ export class IncluirPublicacaoComponent implements OnInit {
       imagem: this.imagem[0]
     })
 
-    let acompanhamentoupload = Observable.interval(1500)
-    let continua = new Subject()
+    let intervalo = setInterval(() => {
+      this.progressoPublicacao = 'andamento'
 
-    continua.next(true)
+      this.porcentagemUpload = Math.round((this.progresso.estado.bytesTransferred / this.progresso.estado.totalBytes) * 100)
 
-    acompanhamentoupload
-      .takeUntil(continua)
-      .subscribe(() => {    
-        // console.log(this.progresso.status)
-        // console.log(this.progresso.estado)
-        this.progressoPublicacao = 'andamento'
-        
-        this.porcentagemUpload = Math.round((this.progresso.estado.bytesTransferred / this.progresso.estado.totalBytes ) * 100)
-
-        if (this.progresso.status === 'concluido') {
-          this.progressoPublicacao = 'concluido'
-          this.atualizarTimeline.emit()
-          continua.next(false)
-        }
-      })
+      if (this.progresso.status === 'concluido') {
+        this.progressoPublicacao = 'concluido'
+        this.atualizarTimeline.emit()
+        clearInterval(intervalo)
+      }
+    }, 1500)
   }
 
   public preparaImagemUpload(event: Event): void {
-    this.imagem = (<HTMLInputElement>event.target).files    
+    this.imagem = (<HTMLInputElement>event.target).files
   }
 
 }
