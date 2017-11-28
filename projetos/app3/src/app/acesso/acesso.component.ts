@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations'
+import { Autenticacao } from '../autenticacao.service'
 
 @Component({
   selector: 'app-acesso',
@@ -44,9 +45,10 @@ export class AcessoComponent implements OnInit {
 
   public cadastro: boolean = false
 
-  constructor() { }
+  constructor(private autenticacao: Autenticacao) { }
 
   ngOnInit() {
+    this.autenticacao.verificaLogin()
   }
 
   public exibirPainel(event: string): void {

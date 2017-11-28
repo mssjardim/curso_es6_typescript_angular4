@@ -25,15 +25,15 @@ export class Autenticacao {
     }
 
     public autenticar(email: string, senha: string): Promise<any> {
-        
+
         return firebase.auth().signInWithEmailAndPassword(email, senha)
             .then((resposta: any) => {
                 firebase.auth().currentUser.getIdToken()
-                .then((idToken: string) => {
-                    this.token_id = idToken
-                    localStorage.setItem('idToken', idToken)
-                    this.router.navigate(['/home'])
-                })
+                    .then((idToken: string) => {
+                        this.token_id = idToken
+                        localStorage.setItem('idToken', idToken)
+                        this.router.navigate(['/home'])
+                    })
             })
     }
 
@@ -56,5 +56,12 @@ export class Autenticacao {
                 this.token_id = undefined
                 this.router.navigate(['/home'])
             })
+    }
+
+    public verificaLogin(): void {
+        if (this.token_id === undefined && localStorage.getItem('idToken') != null) {
+            this.token_id = localStorage.getItem('idToken')
+            this.router.navigate(['/home'])
+        }
     }
 }
