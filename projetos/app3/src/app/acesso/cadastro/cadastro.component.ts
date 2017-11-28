@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormControl} from '@angular/forms'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 import { Usuario } from '../../acesso/usuario.model'
 
@@ -16,12 +16,14 @@ export class CadastroComponent implements OnInit {
   @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>()
 
   public formulario: FormGroup = new FormGroup({
-    'email': new FormControl(null),
-    'nome_completo': new FormControl(null),
-    'nome_usuario': new FormControl(null),
-    'senha' : new FormControl(null)
+    'email': new FormControl('', [Validators.required, Validators.email]),
+    'nome_completo': new FormControl('', [Validators.required]),
+    'nome_usuario': new FormControl('', [Validators.required]),
+    'senha': new FormControl('', [Validators.required, Validators.minLength(6)])
   })
-  
+
+  public errorCadastro: string
+
   constructor(
     private autenticacaoService: Autenticacao
   ) { }
@@ -34,7 +36,6 @@ export class CadastroComponent implements OnInit {
   }
 
   public cadastrarUsuario(): void {
-    console.log(this.formulario)
 
     let usuario: Usuario = new Usuario(
       this.formulario.value.email,
@@ -46,6 +47,9 @@ export class CadastroComponent implements OnInit {
     this.autenticacaoService.cadastrarUsuario(usuario)
       .then((resposta: any) => {
         this.exibirPainelLogin()
+      })      
+      .catch((error: Error) => {        
+        this.errorCadastro = error.message
       })
   }
 

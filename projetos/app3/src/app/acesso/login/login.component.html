@@ -9,6 +9,7 @@
           class="form-control" 
           placeholder="E-mail"
           formControlName="email"
+          (input)="errorLogin=''"
         >
       </div>
       <div class="form-group">
@@ -17,6 +18,7 @@
           class="form-control" 
           placeholder="Senha"
           formControlName="senha"
+          (input)="errorLogin=''"
         >
       </div>
       <button type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="!formulario.valid">Entrar</button>
